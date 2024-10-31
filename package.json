@@ -7,8 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-prod": "ng build --configuration production --service-worker --base-href=/angular-pwa/",
-    "deploy": "npx gh-pages -d dist/"
+    "build-prod": "ng build --configuration production --service-worker --base-href=/maxes/",
+    "deploy": "npx gh-pages -d dist/",
+    "start-pwa": "ng build --configuration=production && http-server -p 8081 -c-1 dist/maxes/browser"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "@angular/cli": "^18.2.10",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "angular-cli-ghpages": "^2.0.3",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

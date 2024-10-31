@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-prod": "ng build --prod --base-href=/angular-pwa/"
+    "build-prod": "ng build --configuration production --service-worker --base-href=/angular-pwa/",
+    "deploy": "npx gh-pages -d dist/"
   },
   "private": true,
   "dependencies": {

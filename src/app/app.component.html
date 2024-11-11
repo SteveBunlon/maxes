@@ -12,7 +12,7 @@
     <mat-card-content>
       <span>max load: {{item.max}}</span>
       <br>
-      <span>training load: {{item.max * 0.80}}</span>
+      <span>training load: {{item.workload}}</span>
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-button (click)="this.openDialog(item.uuid)">Edit</button>

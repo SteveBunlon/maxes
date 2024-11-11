@@ -13,6 +13,7 @@ import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
 import {Search} from './pipes/filter';
+import {MigrateService} from './services/migrate.service';
 
 @Component({
   selector: 'app-root',
@@ -26,14 +27,18 @@ export class AppComponent {
 
   readonly dialog = inject(MatDialog);
   readonly persistenceService = inject(PersistenceService);
+  readonly migrateService = inject(MigrateService);
   protected searchForm = new FormGroup({
     search: new FormControl('')
   });
 
+  constructor() {
+    this.migrateService.migrate();
+  }
+
   openDialog(uuid?: string): void {
     let toEdit: IActivity | undefined;
 
-    console.log(uuid);
     if (uuid) {
       toEdit = this.persistenceService.getByUUID(uuid);
     }
@@ -43,11 +48,12 @@ export class AppComponent {
     });
 
     dialogRef.afterClosed().subscribe((result: IActivity | null) => {
+      console.log(result);
       if (result?.name)
         if (result.uuid)
-          this.persistenceService.editActivity(result.uuid, result.name, result.max);
+          this.persistenceService.editActivity(result.uuid, result.name, result.max, result.workload);
         else
-          this.persistenceService.addActivity(result.name, result.max);
+          this.persistenceService.addActivity(result.name, result.max, result.workload);
     });
   }
 

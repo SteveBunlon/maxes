@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>New activity</h2>
 <mat-dialog-content>
-  <form id="create-activity-form" [formGroup]="form">
+  <form id="create-activity-form" [formGroup]="form" (submit)="submit()" (keydown.enter)="submit()">
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input formControlName="name" matInput>
@@ -9,9 +9,13 @@
       <mat-label>Max</mat-label>
       <input formControlName="max" matInput>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Workload</mat-label>
+      <input formControlName="workload" matInput>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button [mat-dialog-close]="cancel()">Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="createOrEdit()" [disabled]="!form.valid" cdkFocusInitial>{{this.validateButtonAction}}</button>
+  <button type="submit" mat-raised-button [mat-dialog-close]="createOrEdit()" [disabled]="!form.valid" cdkFocusInitial>{{this.validateButtonAction}}</button>
 </mat-dialog-actions>

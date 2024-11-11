@@ -15,26 +15,27 @@ export class PersistenceService {
     this.getActivities();
   }
 
-  addActivity(activityName: string, max: number): void {
+  addActivity(activityName: string, max: number, workload: number): void {
     if (!activityName) return;
 
     this.activities.value.push({
       uuid: crypto.randomUUID(),
       name: activityName,
       max: max,
+      workload: workload,
     });
 
     this.save();
   }
 
-  editActivity(uuid: string, name: string, max: number): void {
+  editActivity(uuid: string, name: string, max: number, workload: number): void {
     const toEdit = this.getByUUID(uuid);
 
     if (!toEdit) return;
 
-    console.log(toEdit.max, max);
     toEdit.name = name;
     toEdit.max = max;
+    toEdit.workload = workload;
 
     this.save();
   }
@@ -54,6 +55,7 @@ export class PersistenceService {
         uuid: values[0],
         name: values[1],
         max: parseInt(values[2]),
+        workload: parseInt(values[3]),
       }
     });
 
@@ -67,9 +69,9 @@ export class PersistenceService {
   save(): void {
     window.localStorage.setItem(STORAGE_NAME, this.activities.value.reduce((acc, activity, currentIndex) => {
       if (currentIndex === 0)
-        return `${activity.uuid}:${activity.name}:${activity.max}`;
+        return `${activity.uuid}:${activity.name}:${activity.max}:${activity.workload}`;
       else
-        return acc + `;${activity.uuid}:${activity.name}:${activity.max}`;
+        return acc + `;${activity.uuid}:${activity.name}:${activity.max}:${activity.workload}`;
     }, ''));
 
     this.getActivities();

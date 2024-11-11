@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build-prod": "ng build --configuration production --service-worker --base-href=/maxes/",
-    "deploy": "ng deploy --dir=dist/maxes/browser --base-href=/maxes/ --build-target=production",
+    "deploy": "ng deploy --dir=dist/maxes/browser --base-href=/maxes/ --build-target=maxes:build:production",
     "start-pwa": "ng build --configuration=production && http-server -p 8081 -c-1 dist/maxes/browser"
   },
   "private": true,
